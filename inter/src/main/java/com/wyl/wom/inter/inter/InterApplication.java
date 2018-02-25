@@ -1,17 +1,12 @@
 package com.wyl.wom.inter.inter;
 
-import com.wyl.wom.inter.kafka.producer.ProducerService;
-import com.wyl.wom.data.MsgData;
 import com.wyl.wom.kafka.IMessage;
 import com.wyl.wom.kafka.impl.KafkaMessage;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 
 @SpringBootApplication
@@ -19,9 +14,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 @ComponentScan(basePackages = "com.wyl.wom")
 public class InterApplication implements CommandLineRunner {
-	@Autowired
-	private ProducerService producerService;
-	@Autowired
 	private KafkaTemplate<String, IMessage> kafkaTemplate;
 	public static void main(String[] args) {
 		SpringApplication.run(InterApplication.class, args);

@@ -16,7 +16,7 @@ public class SendUtil {
             kafkaMessage.setUri(uri);
             kafkaMessage.setData(msg);
             MessageUtil util = new MessageUtil(topic,kafkaMessage);
-            util.execute();
+            return util.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
