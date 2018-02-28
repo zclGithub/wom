@@ -4,6 +4,7 @@ import com.wyl.wom.data.AbstractMessage;
 
 public abstract class AbstractMessageUtil {
     public String id;
+    public Long sendTime;
     protected AbstractMessage respMsg;
     protected IMessage reqMsg;
     public String topic;//发送消息的topic
@@ -25,5 +26,11 @@ public abstract class AbstractMessageUtil {
         this.reqMsg = reqMsg;
     }
 
+    public IMessage getReqMsg() {
+        return reqMsg;
+    }
+
     public abstract AbstractMessage execute() throws Exception;
+
+    public abstract String getTopic();
 }
