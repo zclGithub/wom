@@ -13,6 +13,7 @@ public class KafkaMessage implements IMessage , Serializable {
     private String uri;
     private String msg;
     private Object data;
+    private String backTopic;
 
     @Override
     public void setUuid(String uuid) {
@@ -62,5 +63,15 @@ public class KafkaMessage implements IMessage , Serializable {
     @Override
     public void setData(Object data) {
         this.data = data;
+    }
+
+    @Override
+    public String getBackTopic() {
+        return backTopic;
+    }
+
+    @Override
+    public void setBackTopic(String backTopic) {
+        this.backTopic = backTopic;
     }
 }

@@ -1,7 +1,9 @@
 package com.wyl.wom.inter.action;
 
+import com.wyl.wom.data.AbstractMessage;
 import com.wyl.wom.data.req.GetUserInfoReq;
 import com.wyl.wom.data.resp.GetUserInfoResp;
+import com.wyl.wom.inter.util.SendUtil;
 import com.wyl.wom.kafka.enums.MessageType;
 import com.wyl.wom.kafka.impl.KafkaMessage;
 import com.wyl.wom.kafka.util.MessageUtil;
@@ -28,16 +30,22 @@ public class UserInfoAction {
     @ResponseBody
     public String getUserInfo(){
         GetUserInfoReq req = new GetUserInfoReq();
-        KafkaMessage msg = new KafkaMessage();
-        msg.setUuid(UUID.randomUUID().toString());
-        msg.setUri("getUserInfo");
-        msg.setType(MessageType.OBJECT);
-        msg.setData(req);
-        MessageUtil util = new MessageUtil("inter3",msg);
+//        KafkaMessage msg = new KafkaMessage();
+//        msg.setUuid(UUID.randomUUID().toString());
+//        msg.setUri("getUserInfo1");
+//        msg.setType(MessageType.OBJECT);
+//        msg.setData(req);
+//        MessageUtil util = new MessageUtil("inter3",msg);
         String json = "";
         try {
-            GetUserInfoResp resp = (GetUserInfoResp) util.execute();
-            json = JsonUtil.ObjectToJson(resp);
+//            GetUserInfoResp resp = (GetUserInfoResp) util.execute();
+            AbstractMessage msg = SendUtil.sendMsg("inter3","bss3","getUserInfo1",req);
+            if(msg.isSuc()){
+                GetUserInfoResp resp = (GetUserInfoResp)msg;
+                json = JsonUtil.ObjectToJson(resp);
+            }else{
+                json = JsonUtil.ObjectToJson(msg);
+            }
             System.out.println(json);
         } catch (Exception e) {
             e.printStackTrace();

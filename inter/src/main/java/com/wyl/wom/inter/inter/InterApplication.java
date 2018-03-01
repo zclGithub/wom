@@ -2,6 +2,7 @@ package com.wyl.wom.inter.inter;
 
 import com.wyl.wom.kafka.IMessage;
 import com.wyl.wom.kafka.impl.KafkaMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,6 +15,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 @ComponentScan(basePackages = "com.wyl.wom")
 public class InterApplication implements CommandLineRunner {
+	@Autowired
 	private KafkaTemplate<String, IMessage> kafkaTemplate;
 	public static void main(String[] args) {
 		SpringApplication.run(InterApplication.class, args);
@@ -27,7 +29,7 @@ public class InterApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-//		initTopic();
+		initTopic();
 //		int i=0;
 //		while(true){
 //			try {
@@ -50,15 +52,17 @@ public class InterApplication implements CommandLineRunner {
 	}
 
 	public void initTopic(){
-		kafkaTemplate.send("inter3",new KafkaMessage());
-		kafkaTemplate.send("inter4",new KafkaMessage());
-		kafkaTemplate.send("inter5",new KafkaMessage());
-		kafkaTemplate.send("inter6",new KafkaMessage());
-		kafkaTemplate.send("inter.userInfo",new KafkaMessage());
-		kafkaTemplate.send("bss3",new KafkaMessage());
-		kafkaTemplate.send("bss4",new KafkaMessage());
-		kafkaTemplate.send("bss5",new KafkaMessage());
-		kafkaTemplate.send("bss6",new KafkaMessage());
-		kafkaTemplate.send("bss.userInfo",new KafkaMessage());
+		KafkaMessage msg = new KafkaMessage();
+		msg.setBackTopic("bss3");
+		kafkaTemplate.send("inter3",msg);
+		kafkaTemplate.send("inter4",msg);
+		kafkaTemplate.send("inter5",msg);
+		kafkaTemplate.send("inter6",msg);
+		kafkaTemplate.send("inter.userInfo",msg);
+		kafkaTemplate.send("bss3",msg);
+		kafkaTemplate.send("bss4",msg);
+		kafkaTemplate.send("bss5",msg);
+		kafkaTemplate.send("bss6",msg);
+		kafkaTemplate.send("bss.userInfo",msg);
 	}
 }

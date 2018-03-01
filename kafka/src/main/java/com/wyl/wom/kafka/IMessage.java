@@ -37,4 +37,8 @@ public interface IMessage extends Serializable{
     public Object getData();
 
     public void setData(Object data);
+
+    public String getBackTopic();
+
+    public void setBackTopic(String backTopic);
 }
